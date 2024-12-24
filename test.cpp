@@ -1,8 +1,19 @@
+#include "sigma/sigmaAlgo.hpp"
 #include "sigma/sigmaDefines.hpp"
+#include "sigma/sigmaFiles.hpp"
 #include "sigma/sigmaMath.hpp"
 #include "sigma/sigmaUtils.hpp"
+
 #include <array>
+#include <cstdlib>
+#include <fstream>
 #include <gtest/gtest.h>
+#include <sstream>
+#include <vector>
+
+//
+// SigmaUtilsTest V0.1
+//
 
 namespace {
 // Test for sigma::isEven
@@ -224,11 +235,10 @@ TEST(SigmaUtilsTest, PrintCuboidTest) {
   std::stringstream buffer;
   std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
 
-  sigma::Cuboid<int, 3> cuboid = {{
-      {{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}},
-      {{{10, 11, 12}, {13, 14, 15}, {16, 17, 18}}},
-      {{{19, 20, 21}, {22, 23, 24}, {25, 26, 27}}}
-  }};
+  sigma::Cuboid<int, 3> cuboid = {
+      {{{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}},
+       {{{10, 11, 12}, {13, 14, 15}, {16, 17, 18}}},
+       {{{19, 20, 21}, {22, 23, 24}, {25, 26, 27}}}}};
 
   sigma::printCuboid(cuboid);
 
@@ -244,23 +254,68 @@ TEST(SigmaUtilsTest, PrintCuboidTest) {
   // string cuboid test
   std::stringstream buffer2;
   std::streambuf *old2 = std::cout.rdbuf(buffer2.rdbuf());
-  sigma::Cuboid<std::string, 3> stringCuboid = {{
-    {{{"Hello", "World", "Sigma"}, {"Hello", "World", "Sigma"}, {"Hello", "World", "Sigma"}}},
-    {{{"Hello", "World", "Sigma"}, {"Hello", "World", "Sigma"}, {"Hello", "World", "Sigma"}}},
-    {{{"Hello", "World", "Sigma"}, {"Hello", "World", "Sigma"}, {"Hello", "World", "Sigma"}}}
-}};
+  sigma::Cuboid<std::string, 3> stringCuboid = {
+      {{{{"Hello", "World", "Sigma"},
+         {"Hello", "World", "Sigma"},
+         {"Hello", "World", "Sigma"}}},
+       {{{"Hello", "World", "Sigma"},
+         {"Hello", "World", "Sigma"},
+         {"Hello", "World", "Sigma"}}},
+       {{{"Hello", "World", "Sigma"},
+         {"Hello", "World", "Sigma"},
+         {"Hello", "World", "Sigma"}}}}};
 
   sigma::printCuboid(stringCuboid);
-  
+
   // Restore original cout buffer
   std::cout.rdbuf(old2);
 
   // Verify the output
   std::string expected_output2 =
-      "Hello World Sigma \nHello World Sigma \nHello World Sigma \n\nHello World Sigma \nHello World Sigma \nHello World Sigma \n\nHello World Sigma \nHello World Sigma \nHello World Sigma \n\n";
+      "Hello World Sigma \nHello World Sigma \nHello World Sigma \n\nHello "
+      "World Sigma \nHello World Sigma \nHello World Sigma \n\nHello World "
+      "Sigma \nHello World Sigma \nHello World Sigma \n\n";
   EXPECT_EQ(buffer2.str(), expected_output2);
 }
 
+TEST(SigmaAlgoTest, BoubleSort) {
+  std::vector<int> arr = {5, 4, 3, 2, 1};
+  std::vector<int> sortedArr = sigma::Bublesort<int, 5>(arr);
+  std::vector<int> expectedArr = {1, 2, 3, 4, 5};
+  EXPECT_EQ(sortedArr, expectedArr);
+
+  std::vector<int> arr2 = {7, 2, 8, 9, 100};
+  std::vector<int> sortedArr2 = sigma::Bublesort<int, 5>(arr2);
+  std::vector<int> expectedArr2 = {2, 7, 8, 9, 100};
+  EXPECT_EQ(sortedArr2, expectedArr2);
+
+  std::vector<double> arr3 = {7.5, 2.5, 8.5, 9.5, 100.5};
+  std::vector<double> sortedArr3 = sigma::Bublesort<double, 5>(arr3);
+  std::vector<double> expectedArr3 = {2.5, 7.5, 8.5, 9.5, 100.5};
+  EXPECT_EQ(sortedArr3, expectedArr3);
+
+  std::vector<float> arr4 = {7.5f, 2.5f, 8.5f, 9.5f, 100.5f};
+  std::vector<float> sortedArr4 = sigma::Bublesort<float, 5>(arr4);
+  std::vector<float> expectedArr4 = {2.5f, 7.5f, 8.5f, 9.5f, 100.5f};
+  EXPECT_EQ(sortedArr4, expectedArr4);
+}
+
+TEST(SigmaFilesTest, ReadFileTest) {
+  system("mkdir temp && touch temp/test.txt && echo 'Hello World\nHello, "
+         "World' > temp/test.txt && touch temp/test2.md && echo '# Hello World' > temp/test2.md");
+
+  std::stringstream content;
+  std::stringstream content2;
+  std::ifstream file1 = sigma::readFile("temp/test.txt", content);
+  std::ifstream file2 = sigma::readFile("temp/test2.md", content2);
+
+  std::string expected_content1 = "Hello World\nHello, World\n";
+  std::string expected_content2 = "# Hello World\n";
+  EXPECT_EQ(content.str(), expected_content1);
+  EXPECT_EQ(content2.str(), expected_content2);
+
+  system("rm -rf temp");
+}
 } // namespace
 
 int main(int argc, char **argv) {
