@@ -5,6 +5,7 @@
 #include "sigma/sigmaUtils.hpp"
 
 #include <array>
+#include <cstddef>
 #include <cstdlib>
 #include <fstream>
 #include <gtest/gtest.h>
@@ -227,7 +228,7 @@ TEST(SigmaUtilsTest, PrintMatrixTest) {
   // Verify the output
   std::string expected_output2 =
       "Hello World Sigma \nUtils Test Matrix \nPrint Matrix Test \n";
-  EXPECT_EQ(buffer.str(), expected_output);
+  EXPECT_EQ(buffer2.str(), expected_output2);
 }
 
 TEST(SigmaUtilsTest, PrintCuboidTest) {
@@ -301,20 +302,15 @@ TEST(SigmaAlgoTest, BoubleSort) {
 }
 
 TEST(SigmaFilesTest, ReadFileTest) {
-  system("mkdir temp && touch temp/test.txt && echo 'Hello World\nHello, "
-         "World' > temp/test.txt && touch temp/test2.md && echo '# Hello World' > temp/test2.md");
-
   std::stringstream content;
   std::stringstream content2;
-  std::ifstream file1 = sigma::readFile("temp/test.txt", content);
-  std::ifstream file2 = sigma::readFile("temp/test2.md", content2);
+  std::ifstream file1 = sigma::readFile("tests/test.txt", content);
+  std::ifstream file2 = sigma::readFile("tests/test.md", content2);
 
   std::string expected_content1 = "Hello World\nHello, World\n";
   std::string expected_content2 = "# Hello World\n";
   EXPECT_EQ(content.str(), expected_content1);
   EXPECT_EQ(content2.str(), expected_content2);
-
-  system("rm -rf temp");
 }
 } // namespace
 

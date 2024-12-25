@@ -24,5 +24,34 @@ inline std::vector<T> Bublesort(std::vector<T> arr)
 }
 
 
+inline std::string encrypt(std::string input, uint8 key) {
+  std::string mid = "";
+  for (char c : input) {
+    mid += c + key;
+  }
+
+  std::string output = "";
+
+  for (char c : mid) {
+    output += c - key * 255;
+  }
+
+  return output;
+}
+
+inline std::string decrypt(std::string input, uint8 key) {
+  std::string mid = "";
+  for (char c : input) {
+    mid += c - key;
+  }
+
+  std::string output = "";
+
+  for (char c : mid) {
+    output += c + key * 255;
+  }
+
+  return output;
+}
   
 } // namespace sigma
