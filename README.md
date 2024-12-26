@@ -1,7 +1,7 @@
-# sigmaLib
+# sigmaLibs
 A 
 - simple
-- straigth foreward
+- strait forward
 - fast
 - native
 
@@ -11,5 +11,5 @@ c++ library for personal use.
 - integer types
 - multidimensional arrays
 - functions to print multidimensional arrays
-- divers Math functions like max, Min, abs, usw
+- divers Math functions like max, Min, abs, and more 
 
