@@ -321,6 +321,13 @@ TEST(SigmaAlgoTest, EncryptDecryptTest) {
   EXPECT_EQ(message, decrypted);
 }
 
+TEST(SigmaFilesTestm, WriteFileTest) {
+  std::stringstream content;
+  sigma::writeFile("tests/test2.txt", "Hello World\nHello, World\n");
+  std::ifstream file = sigma::readFile("tests/test2.txt", content);
+  EXPECT_EQ(content.str(), "Hello World\nHello, World\n");
+}
+
 } // namespace
 
 int main(int argc, char **argv) {

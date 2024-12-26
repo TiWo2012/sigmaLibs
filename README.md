@@ -30,31 +30,56 @@ your terminal. You can have a look at the tests in the `test.cpp` file.
 ## documentation:
 `sigmaAlgo.hpp`:
 - encryptString
-    - usage: sigma::encrypt(std::string text, sigma::uint8 key)
-    - returns: std::string
-    - description: encrypts a string with a key.
+
+    usage: sigma::encrypt(std::string text, sigma::uint8 key)
+
+    returns: std::string
+
+    description: encrypts a string with a key.
+
 - decryptString
-    - usage: sigma::decrypt(std::string text, sigma::uint8 key)
-    - returns: std::string
-    - description: decrypts a string with a key.
-    - note: the key has to be the same as the key used to encrypt the string.
+
+    usage: sigma::decrypt(std::string text, sigma::uint8 key)
+
+    returns: std::string
+
+    description: decrypts a string with a key.
+
+    note: the key has to be the same as the key used to encrypt the string.
+
 - bubbleSort
-    - usage: sigma::bubbleSort(std::vector arr)
-    - returns: std::vector 
-    - description: sorts a vector in ascending order.
+
+    usage: sigma::bubbleSort(std::vector arr)
+
+    returns: std::vector 
+
+    description: sorts a vector in ascending order.
 
 `sigmaDefines.hpp`:
-- self explanatory
+
+self explanatory
 
 `sigmaFiles.hpp`:
+
 - readFile
-    - usage: sigma::readFile(std::string path)
-    - returns: std::ifstream
-    - description: reads a file and returns its content as a string.
+    usage: sigma::readFile(std::string path)
+
+    returns: std::ifstream
+
+    description: reads a file and returns its content as a string.
+
+- writeFile
+    usage: sigma::writeFile(std::string path, std::string content)
+
+    returns: void
+
+    description: writes a string to a file.
 
 `sigmaMath.hpp`:
-- self explanatory
+
+self explanatory
 
 `sigmaUtils.hpp`:
-- self explanatory
+
+self explanatory
 
