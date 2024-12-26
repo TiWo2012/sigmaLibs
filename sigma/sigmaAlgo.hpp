@@ -1,5 +1,7 @@
 #pragma once
 
+#include "sigmaDefines.hpp"
+
 #include <cstddef>
 #include <vector>
 #include <type_traits>
@@ -23,8 +25,7 @@ inline std::vector<T> Bublesort(std::vector<T> arr)
     return arr;
 }
 
-
-inline std::string encrypt(std::string input, uint8 key) {
+inline std::string encrypt(std::string input, sigma::uint8 key) {
   std::string mid = "";
   for (char c : input) {
     mid += c + key;
@@ -39,7 +40,7 @@ inline std::string encrypt(std::string input, uint8 key) {
   return output;
 }
 
-inline std::string decrypt(std::string input, uint8 key) {
+inline std::string decrypt(std::string input, sigma::uint8 key) {
   std::string mid = "";
   for (char c : input) {
     mid += c - key;

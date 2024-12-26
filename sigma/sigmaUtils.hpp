@@ -14,8 +14,8 @@ inline void printArray(const std::array<T, N> &arr) {
   }
 }
 
-template <typename T, std::size_t N>
-inline void printMatrix(const Matrix<T, N> &matrix) {
+template <typename T>
+inline void printMatrix(const Matrix<T> &matrix) {
   for (std::size_t i = 0; i < matrix.size(); i++) {
     for (std::size_t j = 0; j < matrix[i].size(); j++) {
       std::cout << matrix[i][j] << " ";
@@ -24,8 +24,8 @@ inline void printMatrix(const Matrix<T, N> &matrix) {
   }
 }
 
-template <typename T, std::size_t N>
-inline void printCuboid(const sigma::Cuboid<T, N> &cuboid) {
+template <typename T>
+inline void printCuboid(const sigma::Cuboid<T> &cuboid) {
   for (std::size_t i = 0; i < cuboid.size(); i++) {
     for (std::size_t j = 0; j < cuboid[i].size(); j++) {
       for (std::size_t k = 0; k < cuboid[i][j].size(); k++) {

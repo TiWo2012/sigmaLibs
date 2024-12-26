@@ -202,7 +202,7 @@ TEST(SigmaUtilsTest, PrintMatrixTest) {
   std::stringstream buffer;
   std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
 
-  sigma::Matrix<int, 3> matrix = {{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}};
+  sigma::Matrix<int> matrix = {{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}};
   sigma::printMatrix(matrix);
 
   // Restore original cout buffer
@@ -216,7 +216,7 @@ TEST(SigmaUtilsTest, PrintMatrixTest) {
   std::stringstream buffer2;
   std::streambuf *old2 = std::cout.rdbuf(buffer2.rdbuf());
 
-  sigma::Matrix<std::string, 3> stringMatrix = {{{"Hello", "World", "Sigma"},
+  sigma::Matrix<std::string> stringMatrix = {{{"Hello", "World", "Sigma"},
                                                  {"Utils", "Test", "Matrix"},
                                                  {"Print", "Matrix", "Test"}}};
 
@@ -236,7 +236,7 @@ TEST(SigmaUtilsTest, PrintCuboidTest) {
   std::stringstream buffer;
   std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
 
-  sigma::Cuboid<int, 3> cuboid = {
+  sigma::Cuboid<int> cuboid = {
       {{{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}},
        {{{10, 11, 12}, {13, 14, 15}, {16, 17, 18}}},
        {{{19, 20, 21}, {22, 23, 24}, {25, 26, 27}}}}};
@@ -255,7 +255,7 @@ TEST(SigmaUtilsTest, PrintCuboidTest) {
   // string cuboid test
   std::stringstream buffer2;
   std::streambuf *old2 = std::cout.rdbuf(buffer2.rdbuf());
-  sigma::Cuboid<std::string, 3> stringCuboid = {
+  sigma::Cuboid<std::string> stringCuboid = {
       {{{{"Hello", "World", "Sigma"},
          {"Hello", "World", "Sigma"},
          {"Hello", "World", "Sigma"}}},
@@ -312,6 +312,14 @@ TEST(SigmaFilesTest, ReadFileTest) {
   EXPECT_EQ(content.str(), expected_content1);
   EXPECT_EQ(content2.str(), expected_content2);
 }
+
+TEST(SigmaAlgoTest, EncryptDecryptTest) {
+  std::string message = "lorem ipsum dolor sit amet consectetur adipiscing elit";
+  std::string encrypted = sigma::encrypt(message);
+  std::string decrypted = sigma::decrypt(encrypted);
+  EXPECT_EQ(message, decrypted);
+}
+
 } // namespace
 
 int main(int argc, char **argv) {

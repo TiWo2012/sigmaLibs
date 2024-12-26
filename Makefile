@@ -3,3 +3,6 @@ test: test.cpp
 
 run: test
 	./test
+
+clean:
+	rm -rf test
