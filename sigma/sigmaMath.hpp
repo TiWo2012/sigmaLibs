@@ -28,7 +28,7 @@ inline T abs(T a) {
 
 template <typename T>
   requires std::is_arithmetic_v<T>
-inline T sqar(T a) {
+inline T sqr(T a) {
   return a * a;
 }
 

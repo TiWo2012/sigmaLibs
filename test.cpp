@@ -106,16 +106,16 @@ TEST(SigmaMathTest, AbsTest) {
   EXPECT_EQ(sigma::abs((double)0), (double)0);  // Zero
 }
 
-TEST(SigmaMathTest, SqarTest) {
-  EXPECT_EQ(sigma::sqar(1), 1);                  // Square of 1
-  EXPECT_EQ(sigma::sqar(-1), 1);                 // Square of -1
-  EXPECT_EQ(sigma::sqar(0), 0);                  // Square of 0
-  EXPECT_EQ(sigma::sqar(1.5f), 2.25f);           // Square of 1.5
-  EXPECT_EQ(sigma::sqar(-1.5f), 2.25f);          // Square of -1.5
-  EXPECT_EQ(sigma::sqar(0.0f), 0.0f);            // Square of 0
-  EXPECT_EQ(sigma::sqar((double)1), (double)1);  // Square of 1
-  EXPECT_EQ(sigma::sqar((double)-1), (double)1); // Square of -1
-  EXPECT_EQ(sigma::sqar((double)0), (double)0);  // Square of 0
+TEST(SigmaMathTest, SqrTest) {
+  EXPECT_EQ(sigma::sqr(1), 1);                  // Square of 1
+  EXPECT_EQ(sigma::sqr(-1), 1);                 // Square of -1
+  EXPECT_EQ(sigma::sqr(0), 0);                  // Square of 0
+  EXPECT_EQ(sigma::sqr(1.5f), 2.25f);           // Square of 1.5
+  EXPECT_EQ(sigma::sqr(-1.5f), 2.25f);          // Square of -1.5
+  EXPECT_EQ(sigma::sqr(0.0f), 0.0f);            // Square of 0
+  EXPECT_EQ(sigma::sqr((double)1), (double)1);  // Square of 1
+  EXPECT_EQ(sigma::sqr((double)-1), (double)1); // Square of -1
+  EXPECT_EQ(sigma::sqr((double)0), (double)0);  // Square of 0
 }
 
 TEST(SigmaMathTest, cubeTest) {
