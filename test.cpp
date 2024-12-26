@@ -315,8 +315,9 @@ TEST(SigmaFilesTest, ReadFileTest) {
 
 TEST(SigmaAlgoTest, EncryptDecryptTest) {
   std::string message = "lorem ipsum dolor sit amet consectetur adipiscing elit";
-  std::string encrypted = sigma::encrypt(message);
-  std::string decrypted = sigma::decrypt(encrypted);
+  sigma::uint8 key = 5;
+  std::string encrypted = sigma::encrypt(message, key);
+  std::string decrypted = sigma::decrypt(encrypted, key);
   EXPECT_EQ(message, decrypted);
 }
 
