@@ -2,13 +2,37 @@
 
 #include <array>
 #include <iostream>
+#include <vector>
 
 #include "sigmaDefines.hpp"
 
 namespace sigma {
+template <typename T, std::size_t N>
+inline std::array<T, N> arrayCopy(std::array<T, N> vec) {
+  // allocate a temporary array
+  std::array<T, N> temp;
 
-  // function to strip a defined string from a different string from left to right
-inline std::string stripLeft(const std::string &str, const std::string &toStrip) {
+  for (std::size_t i = 0; i < vec.size(); i++) {
+    temp[i] = vec[i];
+  }
+
+  return temp;
+}
+
+template <typename T> inline std::vector<T> vectorCopy(std::vector<T> vec) {
+  // allocate a temporary array
+  std::vector<T> temp;
+
+  for (std::size_t i = 0; i < vec.size(); i++) {
+    temp.push_back(vec[i]);
+  }
+
+  return temp;
+}
+
+// function to strip a defined string from a different string from left to right
+inline std::string stripLeft(const std::string &str,
+                             const std::string &toStrip) {
   std::string result = str;
   std::size_t pos = result.find(toStrip);
   if (pos != std::string::npos) {
@@ -17,7 +41,8 @@ inline std::string stripLeft(const std::string &str, const std::string &toStrip)
   return result;
 }
 
-inline std::string stripRight(const std::string &str, const std::string &toStrip) {
+inline std::string stripRight(const std::string &str,
+                              const std::string &toStrip) {
   std::string result = str;
   std::size_t pos = result.find(toStrip);
   if (pos != std::string::npos) {

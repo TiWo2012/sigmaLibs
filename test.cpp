@@ -16,6 +16,34 @@
 //
 
 namespace {
+TEST(SigmaUtilsTest, arrayCopyTest) {
+  std::array<int, 3> arr1 = {1, 2, 3};
+  std::array<int, 3> arr2 = sigma::arrayCopy(arr1);
+  EXPECT_EQ(arr1, arr2);
+
+  std::array<float, 3> arr3 = {3.0f, 2.0f, 3.0f};
+  std::array<float, 3> arr4 = sigma::arrayCopy(arr3);
+  EXPECT_EQ(arr3, arr4);
+
+  std::array<long, 5> arr5 = {1, 2, 3, 12, 2222};
+  std::array<long, 5> arr6 = sigma::arrayCopy(arr5);
+  EXPECT_EQ(arr5, arr6);
+}
+
+TEST(SigmaUtilsTest, vectorCopyTest) {
+  std::vector<int> vec1 = {1, 2, 3};
+  std::vector<int> vec2 = sigma::vectorCopy(vec1);
+  EXPECT_EQ(vec1, vec2);
+
+  std::vector<float> vec3 = {3.0f, 2.0f, 3.0f};
+  std::vector<float> vec4 = sigma::vectorCopy(vec3);
+  EXPECT_EQ(vec3, vec4);
+
+  std::vector<long> vec5 = {1, 2, 3, 12, 2222};
+  std::vector<long> vec6 = sigma::vectorCopy(vec5);
+  EXPECT_EQ(vec5, vec6);
+}
+
 // Test for sigma::isEven
 TEST(SigmaMathTest, IsEvenTest) {
   EXPECT_TRUE(sigma::isEven(2));   // Even number
