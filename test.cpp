@@ -7,7 +7,6 @@
 #include <array>
 #include <cstddef>
 #include <cstdlib>
-#include <fstream>
 #include <gtest/gtest.h>
 #include <sstream>
 #include <vector>
@@ -217,8 +216,8 @@ TEST(SigmaUtilsTest, PrintMatrixTest) {
   std::streambuf *old2 = std::cout.rdbuf(buffer2.rdbuf());
 
   sigma::Matrix<std::string> stringMatrix = {{{"Hello", "World", "Sigma"},
-                                                 {"Utils", "Test", "Matrix"},
-                                                 {"Print", "Matrix", "Test"}}};
+                                              {"Utils", "Test", "Matrix"},
+                                              {"Print", "Matrix", "Test"}}};
 
   sigma::printMatrix(stringMatrix);
 
@@ -236,10 +235,9 @@ TEST(SigmaUtilsTest, PrintCuboidTest) {
   std::stringstream buffer;
   std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
 
-  sigma::Cuboid<int> cuboid = {
-      {{{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}},
-       {{{10, 11, 12}, {13, 14, 15}, {16, 17, 18}}},
-       {{{19, 20, 21}, {22, 23, 24}, {25, 26, 27}}}}};
+  sigma::Cuboid<int> cuboid = {{{{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}},
+                                {{{10, 11, 12}, {13, 14, 15}, {16, 17, 18}}},
+                                {{{19, 20, 21}, {22, 23, 24}, {25, 26, 27}}}}};
 
   sigma::printCuboid(cuboid);
 
@@ -255,16 +253,15 @@ TEST(SigmaUtilsTest, PrintCuboidTest) {
   // string cuboid test
   std::stringstream buffer2;
   std::streambuf *old2 = std::cout.rdbuf(buffer2.rdbuf());
-  sigma::Cuboid<std::string> stringCuboid = {
-      {{{{"Hello", "World", "Sigma"},
-         {"Hello", "World", "Sigma"},
-         {"Hello", "World", "Sigma"}}},
-       {{{"Hello", "World", "Sigma"},
-         {"Hello", "World", "Sigma"},
-         {"Hello", "World", "Sigma"}}},
-       {{{"Hello", "World", "Sigma"},
-         {"Hello", "World", "Sigma"},
-         {"Hello", "World", "Sigma"}}}}};
+  sigma::Cuboid<std::string> stringCuboid = {{{{{"Hello", "World", "Sigma"},
+                                                {"Hello", "World", "Sigma"},
+                                                {"Hello", "World", "Sigma"}}},
+                                              {{{"Hello", "World", "Sigma"},
+                                                {"Hello", "World", "Sigma"},
+                                                {"Hello", "World", "Sigma"}}},
+                                              {{{"Hello", "World", "Sigma"},
+                                                {"Hello", "World", "Sigma"},
+                                                {"Hello", "World", "Sigma"}}}}};
 
   sigma::printCuboid(stringCuboid);
 
@@ -304,8 +301,8 @@ TEST(SigmaAlgoTest, BoubleSort) {
 TEST(SigmaFilesTest, ReadFileTest) {
   std::stringstream content;
   std::stringstream content2;
-  std::ifstream file1 = sigma::readFile("tests/test.txt", content);
-  std::ifstream file2 = sigma::readFile("tests/test.md", content2);
+  sigma::readFile("tests/test.txt", content);
+  sigma::readFile("tests/test.md", content2);
 
   std::string expected_content1 = "Hello World\nHello, World\n";
   std::string expected_content2 = "# Hello World\n";
@@ -314,19 +311,39 @@ TEST(SigmaFilesTest, ReadFileTest) {
 }
 
 TEST(SigmaAlgoTest, EncryptDecryptTest) {
-  std::string message = "lorem ipsum dolor sit amet consectetur adipiscing elit";
+  std::string message =
+      "lorem ipsum dolor sit amet consectetur adipiscing elit";
   sigma::uint8 key = 5;
   std::string encrypted = sigma::encrypt(message, key);
   std::string decrypted = sigma::decrypt(encrypted, key);
   EXPECT_EQ(message, decrypted);
 }
 
-TEST(SigmaFilesTestm, WriteFileTest) {
+TEST(SigmaFilesTest, WriteFileTest) {
   std::stringstream content;
   sigma::writeFile("tests/test2.txt", "Hello World\nHello, World\n");
-  std::ifstream file = sigma::readFile("tests/test2.txt", content);
+  sigma::readFile("tests/test2.txt", content);
   EXPECT_EQ(content.str(), "Hello World\nHello, World\n");
 }
+
+TEST(SigmaFilesTest, findAndReplaceTest) {
+  std::string input = "Hello World";
+  std::string find = "World";
+  std::string replace = "Sigma";
+  std::string expected_output = "Hello Sigma";
+  EXPECT_EQ(sigma::findAndReplace(input, find, replace), expected_output);
+}
+
+TEST(SigmaFilesTest, grepTest) {
+  std::string input = "Hello World";
+  std::string find = "World";
+  bool expected_output = true;
+  EXPECT_EQ(sigma::grep(input, find), expected_output);
+}
+
+//
+// sigmaEditor can't be tested because it is a custom editor for the terminal
+//
 
 } // namespace
 

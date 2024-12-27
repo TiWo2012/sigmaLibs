@@ -1,3 +1,6 @@
 test.dSYM/
 test
 .ds_store
+editorTest
+editorTest.dsym/
+.vscode/

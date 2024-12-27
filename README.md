@@ -11,6 +11,8 @@ c++ library for personal use.
 You can use the library by copying the `sigma` folder into your project.
 To use features like the Bubble sort algorithm you can include the `sigma/sigmaAlgo.hpp`
 file. Below is a list of the implemented features and in witch header file they are.
+Only files with the `sigma` prefix are allowed to be included but for `sigmaEditor.hpp`
+`editor.hpp` is needed to be in the same directory as `sigmaEditor.hpp`.
 
 ## implements:
 - various types (`sigmaDefines.hpp`)
