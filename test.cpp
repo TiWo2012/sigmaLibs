@@ -5,7 +5,6 @@
 #include "sigma/sigmaUtils.hpp"
 
 #include <array>
-#include <cstddef>
 #include <cstdlib>
 #include <gtest/gtest.h>
 #include <sstream>
@@ -16,6 +15,159 @@
 //
 
 namespace {
+TEST(SigmaMathTest, isPrimeTest) {
+  EXPECT_EQ(sigma::isPrime(2), true);
+  EXPECT_EQ(sigma::isPrime(3), true);
+  EXPECT_EQ(sigma::isPrime(4), false);
+  EXPECT_EQ(sigma::isPrime(5), true);
+  EXPECT_EQ(sigma::isPrime(6), false);
+  EXPECT_EQ(sigma::isPrime(7), true);
+  EXPECT_EQ(sigma::isPrime(8), false);
+  EXPECT_EQ(sigma::isPrime(9), false);
+  EXPECT_EQ(sigma::isPrime(10), false);
+  EXPECT_EQ(sigma::isPrime(11), true);
+  EXPECT_EQ(sigma::isPrime(12), false);
+  EXPECT_EQ(sigma::isPrime(13), true);
+  EXPECT_EQ(sigma::isPrime(14), false);
+  EXPECT_EQ(sigma::isPrime(15), false);
+  EXPECT_EQ(sigma::isPrime(16), false);
+  EXPECT_EQ(sigma::isPrime(17), true);
+  EXPECT_EQ(sigma::isPrime(18), false);
+  EXPECT_EQ(sigma::isPrime(19), true);
+  EXPECT_EQ(sigma::isPrime(20), false);
+}
+
+TEST(SigmaMathTest, ceilTest) {
+  EXPECT_EQ(sigma::ceil(1.1), 2);
+  EXPECT_EQ(sigma::ceil(1.9), 2);
+  EXPECT_EQ(sigma::ceil(2.1), 3);
+  EXPECT_EQ(sigma::ceil(2.9), 3);
+}
+
+TEST(SigmaMathTest, floorTest) {
+  EXPECT_EQ(sigma::floor(1.1), 1);
+  EXPECT_EQ(sigma::floor(1.9), 1);
+  EXPECT_EQ(sigma::floor(2.1), 2);
+  EXPECT_EQ(sigma::floor(2.9), 2);
+}
+
+TEST(SigmaMathTest, AreaTest) {
+  EXPECT_EQ(sigma::Area(1, 1), 1);
+  EXPECT_EQ(sigma::Area(2, 2), 4);
+  EXPECT_EQ(sigma::Area(3, 3), 9);
+}
+
+TEST(SigmaMathTest, VolumeTest) {
+  EXPECT_EQ(sigma::Volume(1, 1, 1), 1);
+  EXPECT_EQ(sigma::Volume(2, 2, 2), 8);
+  EXPECT_EQ(sigma::Volume(3, 3, 3), 27);
+}
+
+TEST(SigmaMathTest, roundTest) {
+  EXPECT_EQ(sigma::round(1.1), 1);
+  EXPECT_EQ(sigma::round(1.9), 2);
+  EXPECT_EQ(sigma::round(2.1), 2);
+  EXPECT_EQ(sigma::round(2.9), 3);
+}
+
+TEST(SigmaMathTest, gcdTest) {
+  EXPECT_EQ(sigma::gcd(1, 1), 1);
+  EXPECT_EQ(sigma::gcd(2, 2), 2);
+  EXPECT_EQ(sigma::gcd(3, 3), 3);
+  EXPECT_EQ(sigma::gcd(200, 500), 100);
+}
+
+TEST(SigmaMathTest, lcmTest) {
+  EXPECT_EQ(sigma::lcm(1, 1), 1);
+  EXPECT_EQ(sigma::lcm(2, 2), 2);
+  EXPECT_EQ(sigma::lcm(3, 3), 3);
+  EXPECT_EQ(sigma::lcm(200, 500), 1000);
+}
+
+TEST(SigamMathTest, sqrtTest) {
+  EXPECT_EQ(sigma::sqrt(1), 1);
+  EXPECT_EQ(sigma::sqrt(4), 2);
+  EXPECT_EQ(sigma::sqrt(9), 3);
+}
+
+TEST(SigmaMathTest, cbrtTest) {
+  EXPECT_EQ(sigma::cbrt(1), 1);
+  EXPECT_EQ(sigma::cbrt(8), 2);
+  EXPECT_EQ(sigma::cbrt(27), 3);
+}
+
+TEST(SigmaUtilsTest, removeStringFromStringTest) {
+  std::string str1 = "Hello World";
+  std::string str2 = "Hello";
+  std::string str3 = sigma::removeStringFromString(str1, str2);
+  EXPECT_EQ(str3, " World");
+}
+
+TEST(SigmaUtilsTest, removeCharFromStringTest) {
+  std::string str1 = "Hello World";
+  char str2 = 'l';
+  std::string str3 = sigma::removeCharFromString(str1, str2);
+  EXPECT_EQ(str3, "Heo Word");
+}
+
+TEST(SigmaUtilsTest, removeWhitespaceTest) {
+  std::string str1 = "Hello World";
+  std::string str2 = sigma::removeWhitespace(str1);
+  EXPECT_EQ(str2, "HelloWorld");
+}
+
+TEST(SigmaUtilsTest, ErrorTest) {
+  std::string err = "test";
+  // Redirect cout to a stringstream to test output
+  std::stringstream buffer;
+  std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
+
+  sigma::Error(err);
+
+  // Restore original cout buffer
+  std::cout.rdbuf(old);
+  EXPECT_EQ(buffer.str(), "ERROR: test\n");
+}
+
+TEST(SigmaUtilsTest, WarningTest) {
+  std::string warn = "test";
+  // Redirect cout to a stringstream to test output
+  std::stringstream buffer;
+  std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
+
+  sigma::Warning(warn);
+
+  // Restore original cout buffer
+  std::cout.rdbuf(old);
+  EXPECT_EQ(buffer.str(), "WARNING: test\n");
+}
+
+TEST(SigmaUtilsTest, InfoStringTest) {
+  std::string Info = "test";
+  // Redirect cout to a stringstream to test output
+  std::stringstream buffer;
+  std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
+
+  sigma::InfoString(Info);
+
+  // Restore original cout buffer
+  std::cout.rdbuf(old);
+  EXPECT_EQ(buffer.str(), "INFO: test\n");
+}
+
+TEST(SigmaUtilsTest, InfoValTest) {
+  float Info = 12.5f;
+  // Redirect cout to a stringstream to test output
+  std::stringstream buffer;
+  std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
+
+  sigma::InfoVal(Info);
+
+  // Restore original cout buffer
+  std::cout.rdbuf(old);
+  EXPECT_EQ(buffer.str(), "INFO: 12.5\n");
+}
+
 TEST(SigmaUtilsTest, arrayCopyTest) {
   std::array<int, 3> arr1 = {1, 2, 3};
   std::array<int, 3> arr2 = sigma::arrayCopy(arr1);

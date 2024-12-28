@@ -1,36 +1,17 @@
 #pragma once
 
+#include "sigmaDefines.hpp"
+#include <algorithm>
 #include <array>
 #include <iostream>
 #include <vector>
 
-#include "sigmaDefines.hpp"
-
 namespace sigma {
-template <typename T, std::size_t N>
-inline std::array<T, N> arrayCopy(std::array<T, N> vec) {
-  // allocate a temporary array
-  std::array<T, N> temp;
 
-  for (std::size_t i = 0; i < vec.size(); i++) {
-    temp[i] = vec[i];
-  }
+// functions for string manipulation
 
-  return temp;
-}
-
-template <typename T> inline std::vector<T> vectorCopy(std::vector<T> vec) {
-  // allocate a temporary array
-  std::vector<T> temp;
-
-  for (std::size_t i = 0; i < vec.size(); i++) {
-    temp.push_back(vec[i]);
-  }
-
-  return temp;
-}
-
-// function to strip a defined string from a different string from left to right
+//  function to strip a defined string from a different string from left to
+//  right
 inline std::string stripLeft(const std::string &str,
                              const std::string &toStrip) {
   std::string result = str;
@@ -51,10 +32,57 @@ inline std::string stripRight(const std::string &str,
   return result;
 }
 
+inline std::string removeStringFromString(const std::string &str,
+                                          const std::string &toRemove) {
+  std::string result = str;
+  std::size_t pos = result.find(toRemove);
+  if (pos != std::string::npos) {
+    result.erase(pos, toRemove.length());
+  }
+  return result;
+}
+
+inline std::string removeCharFromString(const std::string &str,
+                                        const char toRemove) {
+  std::string result = str;
+
+  // Use erase-remove idiom to remove all occurrences of 'toRemove'
+  result.erase(std::remove(result.begin(), result.end(), toRemove),
+               result.end());
+
+  return result;
+}
+
+inline std::string removeWhitespace(const std::string &str) {
+  std::string result = str;
+  result.erase(std::remove_if(result.begin(), result.end(),
+                              [](unsigned char x) { return std::isspace(x); }),
+               result.end());
+  return result;
+}
+
+// debugfunctions
 inline void Error(const std::string &msg) {
   std::cout << "ERROR: " << msg << "\n";
 }
 
+inline void Warning(const std::string &msg) {
+  std::cout << "WARNING: " << msg << "\n";
+}
+
+inline void InfoString(const std::string &msg) {
+  std::cout << "INFO: " << msg << "\n";
+}
+
+template <typename T>
+  requires std::is_arithmetic_v<T>
+inline void InfoVal(const T &msg) {
+  std::cout << "INFO: " << msg << "\n";
+}
+
+template <typename T> inline void Value(T value) { std::cout << value << "\n"; }
+
+// functions involving arrays, sigma::cuboid and sigma::matrix
 template <typename T, std::size_t N>
 inline void printArray(const std::array<T, N> &arr) {
   for (std::size_t i = 0; i < arr.size(); i++) {
@@ -82,4 +110,28 @@ template <typename T> inline void printCuboid(const sigma::Cuboid<T> &cuboid) {
     std::cout << "\n";
   }
 }
+
+template <typename T, std::size_t N>
+inline std::array<T, N> arrayCopy(std::array<T, N> vec) {
+  // allocate a temporary array
+  std::array<T, N> temp;
+
+  for (std::size_t i = 0; i < vec.size(); i++) {
+    temp[i] = vec[i];
+  }
+
+  return temp;
+}
+
+template <typename T> inline std::vector<T> vectorCopy(std::vector<T> vec) {
+  // allocate a temporary array
+  std::vector<T> temp;
+
+  for (std::size_t i = 0; i < vec.size(); i++) {
+    temp.push_back(vec[i]);
+  }
+
+  return temp;
+}
+
 } // namespace sigma

@@ -7,8 +7,7 @@
 namespace sigma {
 
 // functionn to read from a file
-inline void readFile(const std::string &filename,
-                              std::stringstream &content) {
+inline void readFile(const std::string &filename, std::stringstream &content) {
   std::ifstream file(filename);
   if (file.is_open()) {
     content << file.rdbuf();

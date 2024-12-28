@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <cstdint>
+#include <vector>
 
 namespace sigma {
 
@@ -14,10 +14,8 @@ using uint32 = std::uint32_t;
 using int64 = std::int64_t;
 using uint64 = std::uint64_t;
 
-template <typename T>
-using Matrix = std::vector<std::vector<T>>;
+template <typename T> using Matrix = std::vector<std::vector<T>>;
 
-template <typename T>
-using Cuboid = std::vector<std::vector<std::vector<T>>>;
+template <typename T> using Cuboid = std::vector<std::vector<std::vector<T>>>;
 
 }; // namespace sigma

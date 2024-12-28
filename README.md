@@ -25,9 +25,13 @@ Only files with the `sigma` prefix are allowed to be included but for `sigmaEdit
 - divers Math functions like max, Min, abs, and more (`sigmaMath.hpp`)
 
 ## tests: 
-The Lib is tested with [GoogleTest](https://github.com/google/googletest) 
+The Library is tested with [GoogleTest](https://github.com/google/googletest) 
 and is strongly tested. To see the test results run: `make && make run` in
 your terminal. You can have a look at the tests in the `test.cpp` file. 
+
+## plans:
+- maybe add abstraction for [raylibs](https://github.com/raysan5/raylib) basic functions.
+- add more algorithms
 
 ## documentation:
 `sigmaAlgo.hpp`:

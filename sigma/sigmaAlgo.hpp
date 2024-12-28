@@ -3,26 +3,23 @@
 #include "sigmaDefines.hpp"
 
 #include <cstddef>
-#include <vector>
+#include <string>
 #include <type_traits>
+#include <vector>
 
 namespace sigma {
 
-template<typename T, std::size_t N>
-requires std::is_arithmetic_v<T>
-inline std::vector<T> Bublesort(std::vector<T> arr)
-{
-    for (size_t i = 0; i < N; i++)
-    {
-        for (size_t j = 0; j < N - i - 1; j++)
-        {
-        if (arr[j] > arr[j + 1])
-        {
-            std::swap(arr[j], arr[j + 1]);
-        }
-        }
+template <typename T, std::size_t N>
+  requires std::is_arithmetic_v<T>
+inline std::vector<T> Bublesort(std::vector<T> arr) {
+  for (size_t i = 0; i < N; i++) {
+    for (size_t j = 0; j < N - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        std::swap(arr[j], arr[j + 1]);
+      }
     }
-    return arr;
+  }
+  return arr;
 }
 
 inline std::string encrypt(std::string input, sigma::uint8 key) {
@@ -54,5 +51,5 @@ inline std::string decrypt(std::string input, sigma::uint8 key) {
 
   return output;
 }
-  
+
 } // namespace sigma
