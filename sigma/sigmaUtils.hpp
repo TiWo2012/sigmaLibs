@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 namespace sigma {
@@ -132,6 +133,17 @@ template <typename T> inline std::vector<T> vectorCopy(std::vector<T> vec) {
   }
 
   return temp;
+}
+
+inline std::stringstream stringToStringstream(const std::string &str) {
+  std::stringstream ss;
+  ss << str;
+  return ss;
+}
+
+inline std::string stringstreamToString(const std::stringstream &ss) {
+  std::string str = ss.str();
+  return str;
 }
 
 } // namespace sigma

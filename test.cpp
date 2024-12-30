@@ -15,6 +15,20 @@
 //
 
 namespace {
+TEST(SigmaUtilsTest, stringToStringstreamTest) {
+  std::string str = "Hello, World!";
+  std::stringstream ss;
+  sigma::stringToStringstream(str, ss);
+  EXPECT_EQ(ss.str(), str);
+}
+
+TEST(SigmaUtilsTest, stringstreamToStringTest) {
+  std::string str = "Hello, World!";
+  std::stringstream ss;
+  sigma::stringToStringstream(str, ss);
+  EXPECT_EQ(ss.str(), str);
+}
+
 TEST(SigmaMathTest, isPrimeTest) {
   EXPECT_EQ(sigma::isPrime(2), true);
   EXPECT_EQ(sigma::isPrime(3), true);
