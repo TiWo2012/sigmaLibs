@@ -4,3 +4,4 @@ test
 editorTest
 editorTest.dsym/
 .vscode/
+sigmaLibs.txt

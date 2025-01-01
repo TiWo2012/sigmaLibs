@@ -21,37 +21,19 @@ inline bool isPrime(int n) {
 }
 
 // Template math functions
-template <typename T>
-  requires std::is_arithmetic_v<T>
-inline T max(T a, T b) {
-  return a > b ? a : b;
-}
+template <typename T> inline T max(T a, T b) { return a > b ? a : b; }
 
-template <typename T>
-  requires std::is_floating_point_v<T>
-inline T ceil(T a) {
-  return std::ceil(a);
-}
+template <typename T> inline T ceil(T a) { return std::ceil(a); }
 
-template <typename T>
-  requires std::is_floating_point_v<T>
-inline T floor(T a) {
-  return std::floor(a);
-}
+template <typename T> inline T floor(T a) { return std::floor(a); }
 
 inline float Area(float a, float b) { return a * b; }
 
 inline float Volume(float a, float b, float c) { return a * b * c; }
 
-template <typename T>
-  requires std::is_floating_point_v<T>
-inline T round(T a) {
-  return std::round(a);
-}
+template <typename T> inline T round(T a) { return std::round(a); }
 
-template <typename T>
-  requires std::is_arithmetic_v<T>
-inline T gcd(T a, T b) {
+template <typename T> inline T gcd(T a, T b) {
   while (b != 0) {
     T temp = b;
     b = a % b;
@@ -60,33 +42,15 @@ inline T gcd(T a, T b) {
   return a;
 }
 
-template <typename T>
-  requires std::is_arithmetic_v<T>
-inline T lcm(T a, T b) {
-  return a * b / gcd(a, b);
-}
+template <typename T> inline T lcm(T a, T b) { return a * b / gcd(a, b); }
 
-template <typename T>
-  requires std::is_arithmetic_v<T>
-inline T min(T a, T b) {
-  return a < b ? a : b;
-}
+template <typename T> inline T min(T a, T b) { return a < b ? a : b; }
 
-template <typename T>
-  requires std::is_arithmetic_v<T>
-inline T abs(T a) {
-  return a < 0 ? -a : a;
-}
+template <typename T> inline T abs(T a) { return a < 0 ? -a : a; }
 
-template <typename T>
-  requires std::is_arithmetic_v<T>
-inline T sqr(T a) {
-  return a * a;
-}
+template <typename T> inline T sqr(T a) { return a * a; }
 
-template <typename T>
-  requires std::is_integral_v<T> // Only for integral types
-inline T sqrt(T a) {
+template <typename T> inline T sqrt(T a) {
   if (a == 0 || a == 1)
     return a; // Handle base cases
 
@@ -108,15 +72,9 @@ inline T sqrt(T a) {
   return result; // Return the largest integer such that result^2 <= a
 }
 
-template <typename T>
-  requires std::is_arithmetic_v<T>
-inline T cube(T a) {
-  return a * a * a;
-}
+template <typename T> inline T cube(T a) { return a * a * a; }
 
-template <typename T>
-  requires std::is_integral_v<T> // Only for integral types
-inline T cbrt(T a) {
+template <typename T> inline T cbrt(T a) {
   if (a == 0)
     return 0; // Handle base case
 
@@ -168,9 +126,7 @@ inline int ToBin(int n) {
   return binaryNumber;
 }
 
-template <typename T>
-  requires std::is_arithmetic_v<T>
-inline T pow(const T base, T exp) {
+template <typename T> inline T pow(const T base, T exp) {
   if (exp == 0)
     return static_cast<T>(1); // any number raised to the power of 0 is 1
   T result = base;
